@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guessing game</title>
+</head>
+<body>
+  <div class="container"></div>
+  
+
+  <script>
+    const title = document.createElement("h1");
+    title.textContent ="Guessing Game";
+        document.body.appendChild(title);
+    const Userinput = document.createElement("input");
+    Userinput.id ="num1";
+    document.body.appendChild(Userinput);
+    const button = document.createElement("button");
+    button.textContent = "guess";
+      document.body.appendChild(button);
+const number= Math.floor(Math.random*10).value;
+     button.onclick = function check() {
+          let inputValue = parseInt(document.getElementById("num1").value);
+    if(inputValue===number){
+      alert("congratulations");
+      
+    }else if(inputValue < number){
+      alert("your number is lower")
+    }else if(inputValue > number){
+      alert("your number is higher")
+    }else{
+      alert("your number doesn't exist")
+    }
+      }
+
+
+    
+  </script>
+</body>
+</html>

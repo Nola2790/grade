@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>countries</title>
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+</head>
+<body>
+    <h1>COUNTRIES</h1>
+    <div class="row" id="po"></div>
+    <script>
+
+        let url ='https://restcountries.com/v3.1/all';
+
+        fetch(url)
+        .then(response => response.json())
+        .then(data => {
+    
+
+data.forEach(country => {
+
+    let card = document.createElement("div");
+  card.className ="col-lg-3 col-md-4 col-sm-6 mb-4";;
+
+ 
+    let cardBody = document.createElement("div");
+ cardBody.className = "card-body";
+
+    let cardTitle = document.createElement("h5");
+ cardTitle.className = "card-title";
+ cardTitle.innerHTML = country.name.common;
+
+    let cardText = document.createElement("p");
+ cardText.className = "card-text";
+ cardText.innerHTML = country.capital?country.capital : 'Capital not available';;
+
+    let cardImage = document.createElement("img");
+ cardImage.className = "card-image";
+ cardImage.src = country.flags.png;
+
+ let cardLink =  document.createElement("a");
+        cardLink.className = "btn btn-primary";
+        cardLink.href = country.url;
+        cardLink.innerHTML = "More info";
+
+  cardBody.appendChild(cardImage);
+           cardBody.appendChild(cardTitle);
+       cardBody.appendChild(cardText);
+     cardBody.appendChild(cardLink);
+     
+     card.appendChild(cardBody);
+     
+     document.getElementById("po").appendChild(card);
+    
+});
+        })
+    </script>
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grocery Store Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f9;
+        }
+        h1 {
+            text-align: center;
+            color: #2d3d0083;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+        .card {
+            width: 18rem;
+            margin: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+        .card-header {
+            background-color: #66998E;
+            color: white;
+            padding: 10px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .card-body {
+            padding: 10px;
+            font-size: 1.2em;
+            text-align: center;
+        }
+        .table-container {
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            margin-top: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        thead th {
+            position: sticky;
+            top: 0;
+            background-color:#BE9141;
+            color: antiquewhite;
+            padding: 12px;
+            text-align: center;
+        }
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #ddd;
+        }
+        canvas {
+            display: block;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Grocery Store Dashboard</h1>
+
+    <div class="container">
+        <div class="card">
+            <div class="card-header">Total Sales</div>
+            <div class="card-body">$5000</div>
+        </div>
+        <div class="card">
+            <div class="card-header">Products Sold</div>
+            <div class="card-body">$250</div>
+        </div>
+        <div class="card">
+            <div class="card-header">Average Price</div>
+            <div class="card-body">$20</div>
+        </div>
+        <div class="card">
+            <div class="card-header">Discount Applied</div>
+            <div class="card-body">15%</div>
+        </div>
+    </div>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Stock</th>
+                    <th>Production Date</th>
+                    <th>Expiration Date</th>
+                    <th>Discount</th>
+                    <th>Availability</th>
+                    <th>Shipping</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Banana</td>
+                    <td>Fruit</td>
+                    <td>$60</td>
+                    <td>50</td>
+                    <td>May 20</td>
+                    <td>May 30</td>
+                    <td>20%</td>
+                    <td>Local</td>
+                    <td>Free</td>
+                </tr>
+                <tr>
+                    <td>Onion</td>
+                    <td>Vegetable</td>
+                    <td>$70</td>
+                    <td>30</td>
+                    <td>May 15</td>
+                    <td>May 25</td>
+                    <td>10%</td>
+                    <td>Local</td>
+                    <td>Free</td>
+                </tr>
+                <tr>
+                    <td>Orange</td>
+                    <td>Fruit</td>
+                    <td>$120</td>
+                    <td>20</td>
+                    <td>May 10</td>
+                    <td>May 20</td>
+                    <td>5%</td>
+                    <td>Imported</td>
+                    <td>$2</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <canvas id="barChart" width="400" height="200"></canvas>
+    <canvas id="doughnutChart" width="400" height="200"></canvas>
+    <canvas id="areaChart" width="400" height="200"></canvas>
+    <canvas id="lineChart" width="400" height="200"></canvas>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const barCtx = document.getElementById('barChart').getContext('2d');
+            const barChart = new Chart(barCtx, {
+                type: 'bar',
+                data: {
+
+                    labels: ['Banana', 'Onion', 'Orange'],
+                    
+                    datasets: [{
+                        label: 'Sales ($)',
+                        data: [3000, 2100, 2400],
+                        backgroundColor: '#7E6B94',
+                        borderColor: '#81946B',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+            CONST areaCtx = document.getElementById("arearChart").getContext("2d");
+            const areaChart =new Chart(areactx , {
+                
+            })
+
+            const doughnutCtx = document.getElementById('doughnutChart').getContext('2d');
+            const doughnutChart = new Chart(doughnutCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Banana', 'Onion', 'Orange'],
+                    datasets: [{
+                        label: 'Sales Distribution',
+                        data: [3000, 2100, 2400],
+                        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+                        hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
+                    }]
+                }
+            });
+
+            const areaCtx = document.getElementById('areaChart').getContext('2d');
+            const areaChart = new Chart(areaCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+                    datasets: [{
+                        label: 'Sales Over Time',
+                        data: [1000, 1500, 2000, 2500],
+                        fill: true,
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            const lineCtx = document.getElementById('lineChart').getContext('2d');
+            const lineChart = new Chart(lineCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4'],
+                    datasets: [{
+                        label: 'Daily Sales',
+                        data: [500, 700, 900, 1200],
+                        borderColor: '#FF6384',
+                        borderWidth: 2,
+                        fill: false
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

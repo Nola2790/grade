@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Click Counter</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: #f0f2f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .counter-card {
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      background-color: #fff;
+      text-align: center;
+    }
+    .btn-custom {
+      background-color: #28a745;
+      color: white;
+      font-size: 1.2rem;
+      border-radius: 50px;
+      padding: 10px 25px;
+    }
+    .btn-custom:hover {
+      background-color: #218838;
+    }
+    #count {
+      font-weight: bold;
+      font-size: 1.5rem;
+      color: #007bff;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="counter-card">
+    <h2>Click Counter</h2>
+    <p>Clicks: <span id="count">0</span></p>
+    <button class="btn btn-custom mt-3" onclick="increment()">Click Here</button>
+  </div>
+
+  <script>
+    let count = localStorage.getItem("click") || 0;
+    count = parseInt(count); // Convert to number
+    document.getElementById("count").textContent = count;
+
+    function increment() {
+      count++;
+      document.getElementById("count").textContent = count;
+      localStorage.setItem("click", count);
+    }
+  </script>
+</body>
+</html>

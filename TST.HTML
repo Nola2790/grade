@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pie Chart</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 8px;
+            text-align: left;
+        }
+        canvas {
+            max-width: 100%;
+            height: 400px;
+        }
+    </style>
+</head>
+<body>
+    <h1>LIST</h1>
+    <form id="po">
+        <input type="text" id="input1" placeholder="Enter the name here" required>
+        <input type="number" id="value1" placeholder="Enter the value here" required>
+        <button type="submit">Add</button>
+
+        <h2>Table</h2>
+        <table id="ro">
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <h3>Chart</h3>
+        <canvas id="pieChart"></canvas>
+    </form>
+    <script>
+        const form = document.getElementById("po");
+        const nameInput = document.getElementById("input1");
+        const valueInput = document.getElementById("value1");
+        const tableBody = document.querySelector("#ro tbody");
+
+        let chartData = [];
+        let chartInstance = null;
+
+        form.addEventListener("submit", function(e) {
+            e.preventDefault();
+            const name = nameInput.value.trim();
+            const value = parseInt(valueInput.value);
+            if (name && !isNaN(value)) {
+                chartData.push({ name, value });
+                renderTable();
+                updateChart();
+                nameInput.value = '';
+                valueInput.value = '';
+            } else {
+                alert("Enter the correct name and value");
+            }
+        });
+
+        function renderTable() {
+            tableBody.innerHTML = '';
+            chartData.forEach(data => {
+                const row = tableBody.insertRow();
+                const cell1 = row.insertCell(0);
+                const cell2 = row.insertCell(1);
+                cell1.textContent = data.name;
+                cell2.textContent = data.value;
+            });
+        }
+
+        function updateChart() {
+            const labels = chartData.map(item => item.name);
+            const values = chartData.map(item => item.value);
+
+            if (chartInstance) {
+                chartInstance.destroy();
+            }
+
+            const ctx = document.getElementById('pieChart').getContext('2d');
+            chartInstance = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Product Values',
+                        data: values,
+                        backgroundColor: 'lightgreen',
+                        borderColor: 'black',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

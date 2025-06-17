@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bar Chart Example</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    canvas {
+      width: 100%;
+      height: 400px;
+    }
+  </style>
+</head>
+<body>
+    <input type="number"  id="input1" placeholder="Enter the value">
+     <input type="number"  id="input2" placeholder="Enter the value">
+      <input type="number"  id="input3" placeholder="Enter the value">
+       <input type="number"  id="input4" placeholder="Enter the value">
+        <button onclick="update()">Update</button>
+
+  <h2>Sales Data</h2>
+  <canvas id="salesChart"></canvas>
+  <script>
+    
+
+        
+    const ctx = document.getElementById('salesChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['January', 'February', 'March', 'April', 'May'],
+        datasets: [{
+          label: 'Monthly Sales',
+          data: [12, 19, 3, 5, 2],
+          backgroundColor: 'rgba(54, 162, 235, 0.2)',
+          borderColor: 'rgba(54, 162, 235, 1)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+   
+           function update() {
+            const newValue = [
+                parseInt(document.getElementById("input1").value) || 0,
+                parseInt(document.getElementById("input2").value) || 0,
+                parseInt(document.getElementById("input3").value) || 0,
+                parseInt(document.getElementById("input4").value) || 0,
+              chart.data.datasets[0].data[4] // Retain the existing value for May
+            ];
+          chart.data.datasets[0].data = newValue;
+      chart.update();
+           }
+
+  </script>
+</body>
+</html>

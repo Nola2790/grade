@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do app</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        
+</head>
+<body>
+    <h1>Grocery List</h1>
+    <form id ="po">
+        <input type="text" id="input" placeholder="Enter The Value Here"/>
+               <input type="number" id="price" placeholder="Enter The Price Here"/>
+                      <input type="text" id="type" placeholder="Enter The Type Here"/>
+                            
+                             <input type="submit" value="Add"/>
+                             <ul id="groceryList"></ul>
+    </form>
+<script>
+    const form = document.getElementById("po");
+      const input = document.getElementById("input");
+        const price = document.getElementById("price");
+          const type = document.getElementById("type");
+            const grocery = document.getElementById("groceryList");
+
+            form.addEventListener("submit" , function(e) {
+                e.preventDefault();
+
+if(input.value.trim() === "") return;
+const li = document.createElement("li");
+li.textContent = ` ${input.value}-$${price.value} (${type.value})`;
+
+  const editbtn = document.createElement("button");
+  editbtn.style.backgroundColor = "yellow";
+  editbtn.textContent ="Edit";
+  editbtn.onclick = () => {
+    const newValue = prompt("enter the new value:", input.value);
+        const newPrice = prompt("enter the new price:", price.value);
+     const newType = prompt("enter the new type:", type.value);
+
+    if(!newValue|| !newPrice || !newType) return;
+           
+li.textContent = ` ${newValue}-$${newPrice} (${newType})`;
+
+            li.appendChild(document.createTextNode(" "));
+            li.appendChild(editbtn);
+                    li.appendChild(document.createTextNode(" "));
+            li.appendChild(deletebtn);
+  }
+  const deletebtn = document.createElement("button");
+  deletebtn.textContent = "Delete";
+  deletebtn.style.backgroundColor ="red";
+  deletebtn.onclick = () => grocery.removeChild(li);
+  
+        li.appendChild(document.createTextNode(" "));
+            li.appendChild(editbtn);
+                    li.appendChild(document.createTextNode(" "));
+            li.appendChild(deletebtn);
+            grocery.appendChild(li);
+
+            input.value = "";
+            price.value ="";
+            type.value ="";
+
+            })
+
+</script>
+</body>
+</html>
